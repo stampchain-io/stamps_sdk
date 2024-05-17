@@ -23,7 +23,8 @@ Happy Building!
 - [QuickNode API](./docs/quickNodeAPI.md)
 - [Mempool.space API](./docs/mempoolAPI.md)
 
-- [SRC20 Specifications](./docs/src20specs.md)
+- [SRC-20 Specifications](./docs/src20specs.md)
+- [SRC-101 Specifications](./docs/src101specs.md)
 
 Please refer to [StampChain API Documentation](https://stampchain.io/docs) for
 more detailed information.
