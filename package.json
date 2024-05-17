@@ -1,0 +1,18 @@
+{
+  "name": "stamps-sdk",
+  "version": "1.0.0",
+  "description": "Bitcoin Stamps SDK for users to get touched into easily with wallet connect, SRC20 transactions, etc",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.5"
+  }
+}
