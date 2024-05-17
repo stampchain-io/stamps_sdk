@@ -16,7 +16,7 @@ impacted Stamp numbering when indexed off Bitcoin.
 
 BTC is not indexed prior to these blocks for Stamp transactions.
 
-### _Block Height Of First Valid Stamp Transaction via Counterparty Tx Format
+### Block Height Of First Valid Stamp Transaction via Counterparty Tx Format
 
 `CP_STAMP_GENESIS_BLOCK = 779652`
 
