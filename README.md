@@ -25,6 +25,7 @@ Happy Building!
 
 - [SRC-20 Specifications](./docs/src20specs.md)
 - [SRC-101 Specifications](./docs/src101specs.md)
+- [STAMPS Consensus](./docs/stampsconsensus.md)
 
 Please refer to [StampChain API Documentation](https://stampchain.io/docs) for
 more detailed information.

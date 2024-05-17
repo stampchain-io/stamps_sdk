@@ -16,29 +16,27 @@ impacted Stamp numbering when indexed off Bitcoin.
 
 BTC is not indexed prior to these blocks for Stamp transactions.
 
-<span style="color:blue">### Block Height Of First Valid Stamp Transaction On
-Counterparty</span>
+### _Block Height Of First Valid Stamp Transaction via Counterparty Tx Format
 
 `CP_STAMP_GENESIS_BLOCK = 779652`
 
 ---
 
-<span style="color:blue">### Block Height Of First SRC-20 Token On
-Counterparty</span>
+### Block Height Of First SRC-20 Token via Counterparty Tx Format
 
 `CP_SRC20_GENESIS_BLOCK = 788041`
 
 ---
 
-<span style="color:blue">### Block Height Of First SRC-721 Token On
-Counterparty</span>
+### Block Height Of First SRC-721 Token On via Counterparty Tx Format
 
 `CP_SRC721_GENESIS_BLOCK = 792370`
 
 ---
 
-<span style="color:blue">### Block Height Of First SRC-20 Token On Bitcoin
-Outside of Counterparty Transaction Format</span>
+### Block Height Of First SRC-20 Token On Bitcoin w/o Counterparty Tx Format
+
+Outside of Counterparty Transaction Format
 
 As of this block Stamp numbering consists of both Counterparty and
 non-Counterparty transaction types. `BTC_SRC20_GENESIS_BLOCK = 793068`
@@ -49,8 +47,7 @@ non-Counterparty transaction types. `BTC_SRC20_GENESIS_BLOCK = 793068`
 
 # Consensus Changes
 
-<span style="color:blue">### Block Height of the last SRC-20 Token on
-Counterparty</span>
+### Block Height of the last SRC-20 Token on Counterparty
 
 All SRC-20 type transactions on Counterparty are ignored after this block.
 
@@ -58,7 +55,7 @@ All SRC-20 type transactions on Counterparty are ignored after this block.
 
 ---
 
-<span style="color:blue">### BMN Audio File Support</span>
+### BMN Audio File Support
 
 Previously these would have been considered cursed stamps. After this block they
 are included in Stamp numbering.
@@ -67,7 +64,7 @@ are included in Stamp numbering.
 
 ---
 
-<span style="color:blue">### P2WSH OLGA Encoded Transactions</span>
+### P2WSH OLGA Encoded Transactions
 
 Support OLGA encoded Stamps to be included in the numbering.
 
@@ -75,7 +72,7 @@ Support OLGA encoded Stamps to be included in the numbering.
 
 ---
 
-<span style="color:blue">### SRC-721 Token Supply Increase</span>
+### SRC-721 Token Supply Increase
 
 Allow SRC-721 tokens to have a Counterparty asset supply > 1. Prior to this
 block SRC-721 tokens that had a Counterparty supply of < 1 were not included in
@@ -85,7 +82,7 @@ numbering. The requirement for keyburn and locked is maintained.
 
 ---
 
-<span style="color:blue">### Strip Whitespace from Base64 Strings</span>
+### Strip Whitespace from Base64 Strings
 
 After this block we attempt to strip whitespace from the derived base64 strings.
 Example: 'STAMP: iVBORx..' becomes 'STAMP:iVBORx..'
@@ -94,7 +91,7 @@ Example: 'STAMP: iVBORx..' becomes 'STAMP:iVBORx..'
 
 ---
 
-<span style="color:blue">### Stop Base64 Repair</span>
+### Stop Base64 Repair
 
 Prior to this block we attempted to repair base64 strings that were missing
 padding and were not a multiple of 4. This attempt to repair malformed Base64
