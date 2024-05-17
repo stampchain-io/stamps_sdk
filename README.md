@@ -28,3 +28,6 @@ Happy Building!
 
 Please refer to [StampChain API Documentation](https://stampchain.io/docs) for
 more detailed information.
+
+For General STAMPS Specifications see here:
+[https://github.com/mikeinspace/stamps](https://github.com/mikeinspace/stamps)
