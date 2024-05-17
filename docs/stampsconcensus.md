@@ -16,46 +16,66 @@ impacted Stamp numbering when indexed off Bitcoin.
 
 BTC is not indexed prior to these blocks for Stamp transactions.
 
-## Block Height Of First Valid Stamp Transaction On Counterparty
+<span style="color:blue">### Block Height Of First Valid Stamp Transaction On
+Counterparty</span>
 
 `CP_STAMP_GENESIS_BLOCK = 779652`
 
-## Block Height Of First SRC-20 Token On Counterparty
+---
+
+<span style="color:blue">### Block Height Of First SRC-20 Token On
+Counterparty</span>
 
 `CP_SRC20_GENESIS_BLOCK = 788041`
 
-## Block Height Of First SRC-721 Token On Counterparty
+---
+
+<span style="color:blue">### Block Height Of First SRC-721 Token On
+Counterparty</span>
 
 `CP_SRC721_GENESIS_BLOCK = 792370`
 
-## Block Height Of First SRC-20 Token On Bitcoin Outside of Counterparty Transaction Format
+---
+
+<span style="color:blue">### Block Height Of First SRC-20 Token On Bitcoin
+Outside of Counterparty Transaction Format</span>
 
 As of this block Stamp numbering consists of both Counterparty and
 non-Counterparty transaction types. `BTC_SRC20_GENESIS_BLOCK = 793068`
 
+---
+
+<br/>
+
 # Consensus Changes
 
-## Block Height of the last SRC-20 Token on Counterparty
+<span style="color:blue">### Block Height of the last SRC-20 Token on
+Counterparty</span>
 
 All SRC-20 type transactions on Counterparty are ignored after this block.
 
 `CP_SRC20_END_BLOCK = 796000`
 
-## BMN Audio File Support
+---
+
+<span style="color:blue">### BMN Audio File Support</span>
 
 Previously these would have been considered cursed stamps. After this block they
 are included in Stamp numbering.
 
 `CP_BMN_FEAT_BLOCK_START = 815130 # BMN`
 
-## P2WSH OLGA Encoded Transactions
+---
+
+<span style="color:blue">### P2WSH OLGA Encoded Transactions</span>
 
 Support OLGA encoded Stamps to be included in the numbering.
+
 `CP_P2WSH_FEAT_BLOCK_START = 833000`
 
-# Consensus changes
+---
 
-## SRC-721 Token Supply Increase
+<span style="color:blue">### SRC-721 Token Supply Increase</span>
 
 Allow SRC-721 tokens to have a Counterparty asset supply > 1. Prior to this
 block SRC-721 tokens that had a Counterparty supply of < 1 were not included in
@@ -63,14 +83,18 @@ numbering. The requirement for keyburn and locked is maintained.
 
 `INCR_SRC721_SUPPLY = 844269`
 
-## Strip Whitespace from Base64 Strings
+---
+
+<span style="color:blue">### Strip Whitespace from Base64 Strings</span>
 
 After this block we attempt to strip whitespace from the derived base64 strings.
 Example: 'STAMP: iVBORx..' becomes 'STAMP:iVBORx..'
 
 `STRIP_WHITESPACE = 797200`
 
-## Stop Base64 Repair
+---
+
+<span style="color:blue">### Stop Base64 Repair</span>
 
 Prior to this block we attempted to repair base64 strings that were missing
 padding and were not a multiple of 4. This attempt to repair malformed Base64
@@ -88,3 +112,5 @@ Example of attempting Base64 repair:
 
         image_data = base64.b64decode(base64_string)
 ```
+
+---
