@@ -28,7 +28,7 @@ BTC is not indexed prior to these blocks for Stamp transactions.
 
 ---
 
-### Block Height Of First SRC-721 Token On via Counterparty Tx Format
+### Block Height Of First SRC-721 Token via Counterparty Tx Format
 
 `CP_SRC721_GENESIS_BLOCK = 792370`
 
