@@ -24,4 +24,4 @@ Happy Building!
 - [Mempool.space API](./docs/mempoolAPI.md)
 
 Please refer to [StampChain API Documentation](https://stampchain.io/docs) for
-more details information.
+more detailed information.
