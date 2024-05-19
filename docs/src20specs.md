@@ -6,7 +6,9 @@ SRC-20 Specifications have changed protocol specifications as of block 796,000.
 SRC-20 transactions are now created directly on BTC and are no-longer supported
 as Counterparty transactions. SRC-20 mints, deploys, and transfers are all free
 from an service fees with the exception of the BTC miners fee when done from a
-supported wallet.
+supported wallet. See:
+[https://stampchain.io/docs#/default/post_api_v2_src20_create](https://stampchain.io/docs#/default/post_api_v2_src20_create)
+and [/core/utils/minting/src20/index.ts](/core/utils/minting/src20/index.ts)
 
 SRC-20 is a bleeding edge specification modeled after BRC-20. Prior
 specifications of SRC-20 in its initial state were built on top of Counterparty
@@ -19,14 +21,16 @@ transaction size and reduces cost of SRC-20 transactions.
 
 # Supported Wallets
 
-The SRC-20 reference wallet for Chrome is available here and is currently the
-only supported method to interact with SRC-20 tokens:
-[The Stamp Wallet](https://www.thestampwallet.com/)
+The SRC-20 Stamp Wallet is available here:
 
-Freewallet and Hiro Wallet do not presently support SRC-20. However, the new
-reference client wallet supports importing BIP39 seeds and individual private
-keys from Freewallet and Hiro wallets. We anticipate that Hiro wallet will add
-SRC-20 support.
+[The Stamp Wallet](https://www.thestampwallet.com/) this allows
+deploy/mint/transfer of SRC-20 tokens and viewing STAMPS and SRC-20 tokens with
+the wallet, but currently does not have a wallet connect feature to interact
+with web apps for trading for example.
+
+[Leather Wallet](https://leather.io/) also supports viewing STAMP and SRC-20
+tokens within the wallet. This wallet can be connected to web apps for trading
+of SRC-20 tokens and other functionality provided by the web app.
 
 # Specifications
 
@@ -38,10 +42,9 @@ index / API.
 SRC-20 transaction must be signed and broadcast onto BTC by the address that
 holds the SRC-20 token balance as it acts as a means to authenticate ownership.
 Both the source and destination addresses are embedded into the BTC transaction
-which is created by the users wallet. The SRC-20 reference wallet will ensure
-you are creating the proper transaction until support can be integrated into
-more broadly distributed wallets such as Hiro. Please use extreme caution if
-signing transactions created by a third party.
+which is created by the users wallet. Please use extreme caution if signing
+transactions created by a third party. These transactions can include additional
+outputs that may send your BTC to an address you do not control.
 
 ### DEPLOY
 
