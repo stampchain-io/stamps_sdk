@@ -21,9 +21,7 @@ index / API.
   "p": "src-101", //(string)protocol standard name for bitname service
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
-  "max": "0", //(uint64)0 means unlimited
   "lim": "10", //(uint64)limit 10 mint op in each transaction, if there are more than 10 mint op in 1 transaction, only the first 10 will be handled.
-  "dec": "0", //(uint8)indivisible NFT
   "owner": "bc1q34eaj4rz9yxupzxwza2epvt3qv2nvcc0ujqqpl", //(string)owner address
   "rec": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", //(string)recipient address to receive mint fees
   "tick": "BNS", //(string)
@@ -31,9 +29,7 @@ index / API.
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
-  "wlf": true, //(bool)whitelist flag
-  "wll": "https://xxxxx",
-  "disc": "50" //(uint8) 50% discount for whitelist address
+  "wll": "https://xxxxx.csv" // whitelist csv link, discount amount and addresses must be included.
 }
 ```
 
@@ -48,8 +44,9 @@ not be considered as a valid SRC-101 transaction.
   "op": "mint", //(string)function name
   "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // recipient address of this mint, can be different from signer address.
-  "tokenid": "7375706572626f79", //(string)UTF8-> hexstring: superboy->7375706572626f79.
-  "dua": "1" //(uint8)years of duration. Expire date = current + dua
+  "tokenid": "c3VwZXJib3k=", // Base64 -> hexstring: 7375706572626f79->superboy.
+  "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
+  "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
 }
 ```
 
@@ -61,7 +58,7 @@ not be considered as a valid SRC-101 transaction.
   "op": "transfer", //(string)function name
   "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, only this txid will be considered as valid in bitname service.
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // new owner address of this token..Support any existed type of bitcoin addresses
-  "tokenid": "7375706572626f79" //
+  "tokenid": "c3VwZXJib3k=", // Base64 -> hexstring: 7375706572626f79->superboy.
 }
 ```
 
@@ -93,9 +90,8 @@ overwrote.
   "p": "src-101", //(string)protocol standard for non-fungible token
   "op": "renew", //(string)function name
   "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
-  "address": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt", //(string)owner address
-  "tokenid": "7375706572626f79", //(string)UTF8-> hexstring
-  "dua": "2" //(uint8)years of duration. Expire date = current + dua
+  "tokenid": "c3VwZXJib3k=", // Base64 -> hexstring: 7375706572626f79->superboy.
+  "dua": "2" //(uint8)years of duration. Expire date = current expire date + dua
 }
 ```
 
