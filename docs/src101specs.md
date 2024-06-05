@@ -23,7 +23,11 @@ index / API.
   "name": "Bit Name Service", //(string)collection name
   "lim": "10", //(uint64)limit 10 mint op in each transaction, if there are more than 10 mint op in 1 transaction, only the first 10 will be handled.
   "owner": "bc1q34eaj4rz9yxupzxwza2epvt3qv2nvcc0ujqqpl", //(string)owner address
-  "rec": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", //(string)recipient address to receive mint fees
+  "rec": [
+  "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww",
+  "bc1q2xexmuqmf20u5yuqcyryqprgyvap9l2wqe3lh9",
+  "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
+  ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification.
   "tick": "BNS", //(string)
   "pri": "30769", //(uint64)price in sats, must pay to "rec"
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
