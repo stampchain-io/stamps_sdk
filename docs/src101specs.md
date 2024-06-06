@@ -27,7 +27,7 @@ index / API.
   "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww",
   "bc1q2xexmuqmf20u5yuqcyryqprgyvap9l2wqe3lh9",
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
-  ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification.
+  ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
   "pri": "30769", //(uint64)price in sats, must pay to "rec"
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
@@ -46,8 +46,8 @@ not be considered as a valid SRC-101 transaction.
 {
   "p": "src-101", //(string)protocol standard name
   "op": "mint", //(string)function name
-  "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction
-  "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // recipient address of this mint, can be different from signer address.
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
+  "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
@@ -60,7 +60,7 @@ not be considered as a valid SRC-101 transaction.
 {
   "p": "src-101", //(string)protocol standard name
   "op": "transfer", //(string)function name
-  "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, only this txid will be considered as valid in bitname service.
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning. Only this txid will be considered as valid in bitname service.
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // new owner address of this token..Support any existed type of bitcoin addresses
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
 }
@@ -76,9 +76,38 @@ transfer will be deemed invalid.
 {
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
-  "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
-  "data": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt" //(string)record data
+  "data":{
+  "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
+  }//(string[])record data 
+}
+```
+
+```JSON
+{
+  "p": "src-101", //(string)protocol standard name
+  "op": "setrecord", //(string)function name
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "type": "address", //(string)Currently two kinds of record types are supported: txt and address
+  "data":{
+  "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
+  }//(string[])record data 
+}
+```
+
+```JSON
+{
+  "p": "src-101", //(string)protocol standard name
+  "op": "setrecord", //(string)function name
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "type": "txt", //(string)Currently two kinds of record types are supported: txt and address
+  "data":
+  {
+  "twitter": "BitnameService",
+  "github": "stampchain-io",
+  "telegram": "BitcoinStamps"
+  }//(string[])record data 
 }
 ```
 
@@ -87,13 +116,19 @@ will not be considered as a valid SRC-101 transaction. Multi record could exist
 for different addresses. If the record for setting is existed, it will be
 overwrote.
 
+`data` is a Json array. 
+
+When `type` is "address", `data` MUST include two string parameters. The first is address type. Currently we only support `btc`and `eth` address type. The second is address value.
+
+When `type` is "txt", `data` can be any you'd like to set. 
+
 ### RENEW
 
 ```JSON
 {
   "p": "src-101", //(string)protocol standard for non-fungible token
   "op": "renew", //(string)function name
-  "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "2" //(uint8)years of duration. Expire date = current expire date + dua
 }
@@ -105,7 +140,7 @@ overwrote.
 {
   "p": "src-101", //(string)protocol standard for non-fungible token
   "op": "transferownership", //(string)function name
-  "hash": "0x38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
   "newowner": "bc1qag3cemd7988sgtx2huscdf6qmvgexnsx393ayc" //(string)new owner address. Support existed 4 types of bitcoin addresses
 }
 ```
