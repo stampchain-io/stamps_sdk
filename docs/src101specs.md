@@ -77,6 +77,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
@@ -89,6 +90,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
@@ -101,6 +103,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "type": "txt", //(string)Currently two kinds of record types are supported: txt and address
   "data":
   {
