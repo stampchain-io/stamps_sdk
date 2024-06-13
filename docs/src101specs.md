@@ -21,7 +21,7 @@ index / API.
   "p": "src-101", //(string)protocol standard name for bitname service
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
-  "lim": "10", //(uint64)limit 10 mint op in each transaction, if there are more than 10 mint op in 1 transaction, only the first 10 will be handled.
+  "lim": "10", //(uint64)A maximum of 10 op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
   "owner": "bc1q34eaj4rz9yxupzxwza2epvt3qv2nvcc0ujqqpl", //(string)owner address
   "rec": [
   "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww",
@@ -54,6 +54,23 @@ not be considered as a valid SRC-101 transaction.
 }
 ```
 
+### MINT
+
+```JSON
+{
+  "p": "src-101", //(string)protocol standard name
+  "op": "mint", //(string)function name
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
+  "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
+  "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of string for multi tokenid mint in one op
+  "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
+  "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
+}
+```
+
+For `single tokenid`, "tokenid" is a base64 string.
+For `multi tokenid`, "tokenid" is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
+
 ### TRANSFER
 
 ```JSON
@@ -66,7 +83,7 @@ not be considered as a valid SRC-101 transaction.
 }
 ```
 
-If the bitname NFT specified to be transferred not in transaction sender's
+If the bitname domain specified to be transferred not in transaction sender's
 address (which would be determined by the latest state of an Indexer), then the
 transfer will be deemed invalid.
 
