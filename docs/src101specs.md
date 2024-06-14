@@ -21,7 +21,7 @@ index / API.
   "p": "src-101", //(string)protocol standard name for bitname service
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
-  "lim": "10", //(uint64)A maximum of 10 op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
+  "lim": "10", //(uint64)A maximum of 10 mint op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
   "owner": "bc1q34eaj4rz9yxupzxwza2epvt3qv2nvcc0ujqqpl", //(string)owner address
   "rec": [
   "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww",
