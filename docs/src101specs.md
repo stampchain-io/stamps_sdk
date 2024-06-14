@@ -48,28 +48,12 @@ not be considered as a valid SRC-101 transaction.
   "op": "mint", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
-  "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
-  "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
-}
-```
-
-### MINT
-
-```JSON
-{
-  "p": "src-101", //(string)protocol standard name
-  "op": "mint", //(string)function name
-  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
-  "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of string for multi tokenid mint in one op
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
 }
 ```
-
-For `single tokenid`, "tokenid" is a base64 string.
-For `multi tokenid`, "tokenid" is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
+`tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
 
 ### TRANSFER
 
