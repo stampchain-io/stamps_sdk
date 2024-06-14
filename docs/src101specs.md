@@ -48,7 +48,7 @@ not be considered as a valid SRC-101 transaction.
   "op": "mint", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
-  "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of string for multi tokenid mint in one op
+  "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
 }
