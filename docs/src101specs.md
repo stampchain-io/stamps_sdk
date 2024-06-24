@@ -19,6 +19,7 @@ index / API.
 ```JSON
 {
   "p": "src-101", //(string)protocol standard name for bitname service
+  "root": "btc", //(string)root domain
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
   "lim": "10", //(uint64)A maximum of 10 mint op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
