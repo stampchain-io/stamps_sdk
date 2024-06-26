@@ -19,6 +19,7 @@ index / API.
 ```JSON
 {
   "p": "src-101", //(string)protocol standard name for bitname service
+  "root": "btc", //(string)root domain
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
   "lim": "10", //(uint64)A maximum of 10 mint op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
@@ -82,7 +83,7 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
-  }//(string[])record data 
+  }//(Object of string value, can include multi pairs)record data 
 }
 ```
 
@@ -95,7 +96,7 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
-  }//(string[])record data 
+  }//(Object of string value, can include multi pairs)record data 
 }
 ```
 
@@ -111,7 +112,7 @@ transfer will be deemed invalid.
   "twitter": "BitnameService",
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
-  }//(string[])record data 
+  }//(Object of string value, can include multi key-value pairs)record data 
 }
 ```
 
@@ -120,7 +121,7 @@ will not be considered as a valid SRC-101 transaction. Multi record could exist
 for different addresses. If the record for setting is existed, it will be
 overwrote.
 
-`data` is a Json array. 
+`data` is a Json object of string value, it can include multi key-value pairs. 
 
 When `type` is "address", `data` MUST include two string parameters. The first is address type. Currently we only support `btc`and `eth` address type. The second is address value.
 
