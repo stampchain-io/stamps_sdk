@@ -19,6 +19,7 @@ index / API.
 ```JSON
 {
   "p": "src-101", //(string)protocol standard name for bitname service
+  "root": "btc", //(string)root domain
   "op": "deploy", //(string)function name
   "name": "Bit Name Service", //(string)collection name
   "lim": "10", //(uint64)A maximum of 10 mint op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
@@ -29,7 +30,7 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": "30769", //(uint64)price in sats, must pay to "rec"
+  "pri": "3900000, 4225000, 545000", //(uint64)price in sats, must pay to "rec". 3900000 is for 3 characters, 4225000 is for 4 characters and 545000 is for >= 5 characters.
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
@@ -82,7 +83,7 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
-  }//(string[])record data 
+  }//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with btc address.
 }
 ```
 
@@ -95,7 +96,7 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
-  }//(string[])record data 
+  }//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address. 
 }
 ```
 
@@ -111,7 +112,7 @@ transfer will be deemed invalid.
   "twitter": "BitnameService",
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
-  }//(string[])record data 
+  }//(Object of string value, can include multi key-value pairs)record data 
 }
 ```
 
@@ -120,7 +121,7 @@ will not be considered as a valid SRC-101 transaction. Multi record could exist
 for different addresses. If the record for setting is existed, it will be
 overwrote.
 
-`data` is a Json array. 
+`data` is a Json object of string value, it can include multi key-value pairs. 
 
 When `type` is "address", `data` MUST include two string parameters. The first is address type. Currently we only support `btc`and `eth` address type. The second is address value.
 
