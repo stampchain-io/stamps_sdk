@@ -49,12 +49,14 @@ not be considered as a valid SRC-101 transaction.
   "op": "mint", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of bns deploy transaction, without "0x" at the beginning
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
-  "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op
+  "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
+
+
 
 ### TRANSFER
 
@@ -126,7 +128,7 @@ overwrote.
 
 `data` is a Json object of string value, it can include multi key-value pairs. 
 
-When `type` is "address", `data` MUST include two string parameters. The first is address type. Currently we only support `btc`and `eth` address type. The second is address value.
+When `type` is "address", `data` MUST include address type and address value. Currently we only support `btc`and `eth` address types and only can set single address as record under each address type. If you set another address record under the same address type, the previous will be covered.
 
 When `type` is "txt", `data` can be any you'd like to set. 
 
@@ -156,3 +158,9 @@ When `type` is "txt", `data` can be any you'd like to set.
 This allows SRC-101 admin transferring ownership to another. The
 `TRANSFEROWNERSHIP` transaction signer must be the same as "owner", otherwise it
 will not be considered as a valid SRC-101 transaction.
+
+# SRC-101 Token Requirements
+
+1. For UTF8 tokenid, there are disallowed characters: /[`~!@#$%^\-+&*()_==＝|{}":;',\\\[\]\.·<>\/?~！@#￥……&*（）——|{}【】《》'；：“”‘。，、？\s]/
+2. Some special **Whitespace_character** are also disallowed, here are their unicode list:
+`["\u0009","\u000A","\u000B","\u000C","\u000D","\u0020","\u0085","\u00A0","\u1680","\u2000","\u2001","\u2002","\u2003","\u2004","\u2005","\u2006","\u2007","\u2008","\u2009","\u200A","\u2028","\u2029","\u202F","\u205F","\u3000","\u180E","\u200B","\u200C","\u200D","\u2060","\uFEFF"]`
