@@ -64,7 +64,7 @@ not be considered as a valid SRC-101 transaction.
   "op": "transfer", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning. Only this txid will be considered as valid in bitname service.
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // new owner address of this token..Support any existed type of bitcoin addresses
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "tokenid": "c3VwZXJib3k=" //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
 }
 ```
 
@@ -83,7 +83,8 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
-  }//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with btc address.
+  },//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with btc address.
+  "prim":"true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
 }
 ```
 
@@ -96,7 +97,8 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
-  }//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address. 
+  },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address. 
+  "prim":"true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
 }
 ```
 
@@ -112,7 +114,8 @@ transfer will be deemed invalid.
   "twitter": "BitnameService",
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
-  }//(Object of string value, can include multi key-value pairs)record data 
+  },//(Object of string value, can include multi key-value pairs)record data 
+  "prim":"false" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
 }
 ```
 
