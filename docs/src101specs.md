@@ -51,7 +51,7 @@ not be considered as a valid SRC-101 transaction.
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
-  "prim": "true" //This will allow setting current owner address as a primary address to bind with this domain. You can setrecord to another address later as you wish. If you don't need this, just set it to false.
+  "prim": "true" //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
@@ -84,8 +84,9 @@ transfer will be deemed invalid.
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
-  "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
-  },//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with btc address.
+  "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt",
+  "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
+  },//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with both btc and eth address.
   "prim":"true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
 }
 ```
@@ -98,9 +99,23 @@ transfer will be deemed invalid.
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
+  "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
+  },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with btc address and set eth address as null. 
+  "prim":"true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+}
+```
+
+```JSON
+{
+  "p": "src-101", //(string)protocol standard name
+  "op": "setrecord", //(string)function name
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "type": "address", //(string)Currently two kinds of record types are supported: txt and address
+  "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
-  },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address. 
-  "prim":"true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
+  },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address and set btc address as null. 
+  "prim":"true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
 }
 ```
 
@@ -117,20 +132,22 @@ transfer will be deemed invalid.
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
   },//(Object of string value, can include multi key-value pairs)record data 
-  "prim":"false" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
+  "prim":"false" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
 }
 ```
 
 The `SETRECORD` transaction signer must be the same as "owner", otherwise it
-will not be considered as a valid SRC-101 transaction. Multi record could exist
-for different addresses. If the record for setting is existed, it will be
-overwrote.
+will not be considered as a valid SRC-101 transaction. 
 
 `data` is a Json object of string value, it can include multi key-value pairs. 
 
-When `type` is "address", `data` MUST include address type and address value. Currently we only support `btc`and `eth` address types and only can set single address as record under each address type. If you set another address record under the same address type, the previous will be covered.
+When `type` is "address", `data` MUST include address type and address value. Currently we only support `btc`and `eth` address types and only can set single address as record under each address type. 
 
-When `type` is "txt", `data` can be any you'd like to set. 
+If you set a new address record under the same address type, the previous will be overwritten. If you set a single address record, for example, only btc, then eth will be set as null. It's recommended to set both `btc` and `eth` address everytime when making setrecord transaction in case the missing one is overwritten. 
+
+If `prim` is true and `type` is not "txt", `prim` will not work. If `prim` is true, `type` is "address" and `data` is not including `btc` address,  `prim` will not work as well.
+
+When `type` is "txt", `data` can be any you'd like to set. Some key words like "twitter", "github" and "telegram" may be picked as user info by Bitname Service.
 
 ### RENEW
 
