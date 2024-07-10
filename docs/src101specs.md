@@ -87,7 +87,7 @@ transfer will be deemed invalid.
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt",
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
   },//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with both btc and eth address.
-  "prim":"true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
+  "prim": "true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
 }
 ```
 
@@ -101,7 +101,7 @@ transfer will be deemed invalid.
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with btc address and set eth address as null. 
-  "prim":"true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
 }
 ```
 
@@ -115,7 +115,7 @@ transfer will be deemed invalid.
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
   },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address and set btc address as null. 
-  "prim":"true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
 }
 ```
 
@@ -132,7 +132,7 @@ transfer will be deemed invalid.
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
   },//(Object of string value, can include multi key-value pairs)record data 
-  "prim":"false" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "false" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
 }
 ```
 
@@ -143,7 +143,7 @@ will not be considered as a valid SRC-101 transaction.
 
 When `type` is "address", `data` MUST include address type and address value. Currently we only support `btc`and `eth` address types and only can set single address as record under each address type. 
 
-If you set a new address record under the same address type, the previous will be overwritten. If you set a single address record, for example, only btc, then eth will be set as null. It's recommended to set both `btc` and `eth` address everytime when making setrecord transaction in case the missing one is overwritten. 
+If you set a new address record in the same address type, the previous will be overwritten. If you set a single address record, for example, only btc, then eth will be set as null. It's recommended to set both `btc` and `eth` address every time when making set record transaction in case the missing one is overwritten. 
 
 If `prim` is true and `type` is not "txt", `prim` will not work. If `prim` is true, `type` is "address" and `data` is not including `btc` address,  `prim` will not work as well.
 
@@ -179,5 +179,5 @@ will not be considered as a valid SRC-101 transaction.
 # SRC-101 Token Requirements
 
 1. For UTF8 tokenid, these are disallowed characters: /[`~!@#$%^\-+&*()_==＝|{}":;',\\\[\]\.·<>\/?~！@#￥……&*（）——|{}【】《》'；：“”‘。，、？\s]/
-2. Some special **Whitespace_character** are also disallowed, here are their unicode list:
+2. Some special **Whitespace_character** are also disallowed, here is the unicode list:
 `["\u0009","\u000A","\u000B","\u000C","\u000D","\u0020","\u0085","\u00A0","\u1680","\u2000","\u2001","\u2002","\u2003","\u2004","\u2005","\u2006","\u2007","\u2008","\u2009","\u200A","\u2028","\u2029","\u202F","\u205F","\u3000","\u180E","\u200B","\u200C","\u200D","\u2060","\uFEFF"]`
