@@ -54,7 +54,7 @@ not be considered as a valid SRC-101 transaction.
   "prim": "true" //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
 }
 ```
-`tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op.
+`tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
 
 
 
@@ -81,7 +81,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.Maximum length of `tokenid` base64 string is 128.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt",
@@ -96,7 +96,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.Maximum length of `tokenid` base64 string is 128.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
@@ -110,7 +110,7 @@ transfer will be deemed invalid.
   "p": "src-101", //(string)protocol standard name
   "op": "setrecord", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction, without "0x" at the beginning
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.Maximum length of `tokenid` base64 string is 128.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
   "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
@@ -156,7 +156,7 @@ When `type` is "txt", `data` can be any you'd like to set. Some key words like "
   "p": "src-101", //(string)protocol standard for non-fungible token
   "op": "renew", //(string)function name
   "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy. Maximum length of `tokenid` base64 string is 128.
   "dua": "2" //(uint8)years of duration. Expire date = current expire date + dua
 }
 ```
