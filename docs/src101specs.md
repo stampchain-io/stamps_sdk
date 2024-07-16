@@ -34,7 +34,7 @@ index / API.
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
-  "wll": "https://xxxxx.csv" // whitelist csv link, discount amount and addresses must be included.
+  "wll": "https://github.com/superboyiii/stamps_sdk/blob/src-101/docs/whitelist.csv" // whitelist csv link, discount amount and addresses must be included.
 }
 ```
 
