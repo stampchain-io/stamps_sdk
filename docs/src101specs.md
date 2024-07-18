@@ -30,7 +30,7 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": "900000, 225000, 45000", //(uint64)price in sats, must pay to "rec". 900000 is for 3 characters, 225000 is for 4 characters and 45000 is for >= 5 characters.
+  "pri": "https://github.com/superboyiii/stamps_sdk/blob/src-101/docs/price.csv", //(uint64)price in sats, must pay to "rec". 900000 is for 3 characters, 225000 is for 4 characters and 45000 is for >= 5 characters.
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
