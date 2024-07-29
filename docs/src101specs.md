@@ -30,11 +30,13 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": "https://github.com/superboyiii/stamps_sdk/blob/src-101/docs/price.csv", //(uint64)price in sats, must pay to "rec". 900000 is for 3 characters, 225000 is for 4 characters and 45000 is for >= 5 characters.
+  "pri": {"1":"-1","2":"-1","3":"900000","4":"225000","df":"45000"}, //json object. The key is the length of domain. These fee must be paid to "rec". Value is price in sats. Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is default price for >= 5 characters.
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
-  "wll": "https://github.com/superboyiii/stamps_sdk/blob/src-101/docs/whitelist.csv" // whitelist csv link, discount amount and addresses must be included.
+  "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
+  "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+tokenid(base64)+"."+"imgf"
+  "imgf":"png" //(optional)image format
 }
 ```
 
@@ -51,10 +53,21 @@ not be considered as a valid SRC-101 transaction.
   "toaddress": "bc1q7rwd4cgdvcmrxm27xfy6504jwkllge3dda04ww", // owner address of this token, can be different from signer address.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
-  "prim": "true" //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
+  "prim": "true", //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
+  "sig": "1234...abcd" //(optional)It's used for a premissioned mint follow whitelist. 
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
+
+`sig` is a script signed  by private key of `wla` . The signed content is a json object, must follow the format below:
+
+```json
+{
+    "coef": "50",
+    "address": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
+}
+```
+When `sig` is set in mint, the whitelist price should be `coef`*`pri`/100.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
 
 
 
@@ -70,7 +83,7 @@ not be considered as a valid SRC-101 transaction.
 }
 ```
 
-If the bitname domain specified to be transferred not in transaction sender's
+If the Bitname domain specified to be transferred not in transaction sender's
 address (which would be determined by the latest state of an Indexer), then the
 transfer will be deemed invalid.
 
