@@ -35,7 +35,7 @@ index / API.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
-  "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+tokenid(base64)+"."+"imgf"
+  "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+"tokenid"(base64)+"."+"imgf"
   "imgf":"png" //(optional)image format
 }
 ```
@@ -54,7 +54,8 @@ not be considered as a valid SRC-101 transaction.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true", //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
-  "sig": "1234...abcd" //(optional)It's used for a premissioned mint follow whitelist. 
+  "sig": "1234...abcd", //(optional)It's used for a premissioned mint following whitelist. 
+  "img": "https://xxx.png" //(optional) It's a customized image link. This only works when "imglp" is not set.
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
@@ -188,6 +189,19 @@ When `type` is "txt", `data` can be any you'd like to set. Some key words like "
 This allows SRC-101 admin transferring ownership to another. The
 `TRANSFEROWNERSHIP` transaction signer must be the same as "owner", otherwise it
 will not be considered as a valid SRC-101 transaction.
+
+### SETSTAMPIMG
+
+```JSON
+{
+  "p": "src-101", //(string)protocol standard for non-fungible token
+  "op": "setstampimg", //(string)function name
+  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
+  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy. Maximum length of `tokenid` base64 string is 128.
+}
+```
+
+This allows storing image on bitcoin network by stamp protocol. If this tokenid has not been minted yet, or owner address is different from signer address, or image has not been generated yet, this transaction will be invalid. To ensure image is already generated, recommend to try the url first: "imglp"+"tokenid"+"."+"imgf".
 
 # SRC-101 Token Requirements
 
