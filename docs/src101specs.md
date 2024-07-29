@@ -64,11 +64,11 @@ not be considered as a valid SRC-101 transaction.
 
 ```json
 {
-    "coef": "50",
+    "coef": "500",
     "address": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
 }
 ```
-When `sig` is set in mint, the whitelist price should be `coef`*`pri`/100.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
+When `sig` is set in mint, the whitelist price in sats  should be `coef`*`pri`/1000.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
 
 
 
