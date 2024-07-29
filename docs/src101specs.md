@@ -60,7 +60,7 @@ not be considered as a valid SRC-101 transaction.
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
 
-`sig` is a script signed  by private key of `wla` . The signed content is a json object, must follow the format below:
+`sig` is a script signed  by private key of `wla` . The unsigned content is a json object, must follow the format below:
 
 ```json
 {
