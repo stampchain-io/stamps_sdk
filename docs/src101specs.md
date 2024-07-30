@@ -65,11 +65,14 @@ not be considered as a valid SRC-101 transaction.
 ```json
 {
     "coef": "500",
-    "address": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
+    "address": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt",
+    "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="],
+    "dua": "3"
 }
 ```
 When `sig` is set in mint, the whitelist price in sats  should be `coef`*`pri`/1000.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
 
+`tokenid` and `dua` in `sig` json will overwrite these ones in upper layer of mint method. That means the values in `sig` determine the final parameters of this transaction.
 
 
 ### TRANSFER
