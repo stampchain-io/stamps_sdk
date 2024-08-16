@@ -196,19 +196,6 @@ This allows SRC-101 admin transferring ownership to another. The
 `TRANSFEROWNERSHIP` transaction signer must be the same as "owner", otherwise it
 will not be considered as a valid SRC-101 transaction.
 
-### SETSTAMPIMG
-
-```JSON
-{
-  "p": "src-101", //(string)protocol standard for non-fungible token
-  "op": "setstampimg", //(string)function name
-  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
-  "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy. Maximum length of `tokenid` base64 string is 128.
-}
-```
-
-This allows storing image on bitcoin network by stamp protocol. If this tokenid has not been minted yet, or owner address is different from signer address, or image has not been generated yet, this transaction will be invalid. To ensure image is already generated, recommend to try the url first: "imglp"+"tokenid"+"."+"imgf".
-
 # SRC-101 Token Requirements
 
 1. For UTF8 tokenid, these are disallowed characters: /[`~!@#$%^\-+&*()_==＝|{}":;',\\\[\]\.·<>\/?~！@#￥……&*（）——|{}【】《》'；：“”‘。，、？\s]/
