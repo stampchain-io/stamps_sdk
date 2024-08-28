@@ -30,7 +30,7 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": {"0":"45000","1":"-1","2":"-1","3":"900000","4":"225000"}, //json object. The key is the length of domain. These fee must be paid to "rec". Value is price in sats. Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is default price for >= 5 characters.
+  "pri": {"0":45000,"1":-1,"2":-1,"3":900000,"4":225000}, //json object. The key is the length number of domain. These fee must be paid to "rec". Value is price in sats. Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is the default price for these unlisted legnth(>=5).
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
