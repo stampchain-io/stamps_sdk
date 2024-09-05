@@ -167,7 +167,7 @@ When `type` is "address", `data` MUST include address type. Currently we only su
 UTXO: 3409229f61face039da6bfc947252f506f379e41e3ef4a7d0cf9006b0afce695
 UXO as Message to keccak256: d7f2304806700771ad69624987a51c1c0dc2ee7884fe75428bc3e02cb6921070
 Then sign it with aimed eth address: 7748baa6434fd17e4901e2049acad30fac188398e235e92efcd9ab90dfd67c602b4c6a50f0f62a6d3fa6d6a46abe6c1ae141f8f3322b7266fe9611a029dd7a971c
-Signer address can be reovered by keccak256 message hash and signature:
+Signer address can be recovered by keccak256 message hash and signature:
 2CA7447310b9588D9112Ee68D83dAeD4D17e5719
 ```
 
