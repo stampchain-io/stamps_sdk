@@ -55,7 +55,7 @@ not be considered as a valid SRC-101 transaction.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true", //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
-  "coef": "500", //The whitelist price in sats should be "coef" * "pri"/1000.For these not in whitelist, it should always be 1000.
+  "coef": "500", //The whitelist price in sats should be "coef" * "pri"/1000.For these not in whitelist, it should always be "".
   "sig": "1234...abcd", //It's used for a premissioned mint following whitelist.If not in whitelist or just want normal price, set it as "" 
   "img": ["https://img.bitname.pro/img/superboy.png", "https://img.bitname.pro/img/daydream.png","https://img.bitname.pro/img/bithero.png"] //(optional) Image link to bind with token. When "imglp" and "imgf" are set, it should be "imglp"+"tokenid"(base64)+"."+"imgf". If "imglp" or "imgf" aren't set, it can be customized link.
 }
