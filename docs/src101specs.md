@@ -30,13 +30,14 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": {"0":45000,"1":-1,"2":-1,"3":900000,"4":225000}, //json object. The key is the length number of domain. These fee must be paid to "rec". Value is price in sats. Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is the default price for these unlisted legnth(>=5).
+  "pri": {"0":45000,"1":-1,"2":-1,"3":900000,"4":225000}, //json object. The key is the length number of domain. These fee must be paid to "rec". Value is price in sats for each "idua". Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is the default price for these unlisted legnth(>=5).
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
   "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+"tokenid"(base64)+"."+"imgf"
-  "imgf":"png" //(optional)image format
+  "imgf":"png", //(optional)image format
+  "idua":{"0":999,"1":-1,"2":-1,"3":999,"4":999} //json object. The key is the length number of domain. Value is minimum duration."idua" is paired with pri. For example 3-characters domain here needs 45000 sats for 999-years duration.
 }
 ```
 
@@ -62,6 +63,8 @@ not be considered as a valid SRC-101 transaction.
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
 
 `sig` is a script signed  by private key of `wla` . The unsigned content is a json object, must follow the format below:
+
+If `dua` is not an integer multiple of `idua`, `dua` will be rounded up. For example: When `idua` is 20 and `dua` is 33, `dua` will be forced to set as 40.
 
 ```json
 {
