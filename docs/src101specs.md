@@ -37,7 +37,7 @@ index / API.
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
   "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+"tokenid"(base64)+"."+"imgf"
   "imgf":"png", //(optional)image format
-  "idua":{"0":999,"1":-1,"2":-1,"3":999,"4":999} //json object. The key is the length number of domain. Value is minimum duration."idua" is paired with pri. For example 3-characters domain here needs 45000 sats for 999-years duration.
+  "idua":{"0":999,"1":-1,"2":-1,"3":999,"4":999} //json object. The key is the length number of domain. Value is minimum duration."idua" is paired with "pri". For example 3-characters domain here needs 45000 sats for 999-years duration.
 }
 ```
 
