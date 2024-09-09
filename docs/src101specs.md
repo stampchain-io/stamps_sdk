@@ -79,7 +79,7 @@ When `sig` is set in mint, the whitelist price in sats should be `coef`*`pri`/10
 
 `hash` in `sig` json must be the same as the `hash` in upper layer, otherwise transaction is invalid.
 
-These parameters in `sig` json  must be the same as these ones in upper layer of mint method. Otherwise, this transaction will be invalid.
+These parameters in `sig` json  must be the same as these ones in upper layer of mint method. Otherwise, this transaction verification will be failed.
 
 
 ### TRANSFER
