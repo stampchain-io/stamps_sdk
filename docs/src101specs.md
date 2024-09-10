@@ -35,7 +35,7 @@ index / API.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
-  "imglp":"https://img.bitname.pro/img/", //Image url link prefix.The full link should be "imglp"+"tokenid"(base64)+"."+"imgf"
+  "imglp":"https://img.bitname.pro/img/", //Image url link prefix.The full link should be "imglp"+"tokenid"(utf8)+"."+"root"+"."+imgf"
   "imgf":"png", //image format
   "idua":{"0":999,"1":-1,"2":-1,"3":999,"4":999} //json object. The key is the length number of domain. Value is minimum duration."idua" is paired with "pri". For example 3-characters domain here needs 45000 sats for 999-years duration.
 }
@@ -57,7 +57,7 @@ not be considered as a valid SRC-101 transaction.
   "prim": "true", //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
   "coef": "500", //The whitelist price in sats should be "coef" * "pri"/1000.For these not in whitelist, it should always be "".
   "sig": "1234...abcd", //It's used for a premissioned mint following whitelist.If not in whitelist or just want normal price, set it as "" 
-  "img": ["https://img.bitname.pro/img/superboy.png", "https://img.bitname.pro/img/daydream.png","https://img.bitname.pro/img/bithero.png"] //(optional) Image link to bind with token. When "imglp" and "imgf" are set, it should be "imglp"+"tokenid"(base64)+"."+"imgf". If "imglp" or "imgf" aren't set, it can be customized link.
+  "img": ["https://img.bitname.pro/img/superboy.png", "https://img.bitname.pro/img/daydream.png","https://img.bitname.pro/img/bithero.png"] //(optional) Image link to bind with token. When "imglp" and "imgf" are set, it should be "imglp"+"tokenid"(utf8)+"."+"root"+"."+imgf". If "imglp" or "imgf" aren't set, it can be customized link.
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
