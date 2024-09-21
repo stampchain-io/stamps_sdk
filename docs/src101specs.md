@@ -30,13 +30,14 @@ index / API.
   "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   ], //(string[])recipient address to receive mint fees, can include multi addresses in an array of string. Either will be valid in transaction verification. Pay mint fees to either of these is OK.
   "tick": "BNS", //(string)
-  "pri": {"0":45000,"1":-1,"2":-1,"3":900000,"4":225000}, //json object. The key is the length number of domain. These fee must be paid to "rec". Value is price in sats. Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is the default price for these unlisted legnth(>=5).
+  "pri": {"0":45000,"1":-1,"2":-1,"3":900000,"4":225000}, //json object. The key is the length number of domain. These fee must be paid to "rec". Value is price in sats for each "idua". Allowed max count of this json key-value pair is 10. "-1" means it isn't mintable. 900000 is for 3 characters, 225000 is for 4 characters and 45000 is the default price for these unlisted legnth(>=5).
   "desc": "Bitname Service powered by BTC stamp.", //(string)description for the collection.
   "mintstart": "1706866958", // Unix timestamps in Milliseconds. Mint is available from this time.
   "mintend": "18446744073709551615", // Maximum Unix timestamps
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
-  "imglp":"https://img.bitname.pro/img/", //(optional)Image url link prefix.The full link should be "imglp"+"tokenid"(base64)+"."+"imgf"
-  "imgf":"png" //(optional)image format
+  "imglp":"https://img.bitname.pro/img/", //Image url link prefix.The full link should be "imglp"+"tokenid"(utf8)+"."+"root"+"."+imgf"
+  "imgf":"png", //image format
+  "idua": "999"//(string)"idua" is minimum duration. That means the actual duration = (dua/idua + 1)*idua. The price will be (dua/idua + 1)*pri.
 }
 ```
 
@@ -54,13 +55,16 @@ not be considered as a valid SRC-101 transaction.
   "tokenid": ["c3VwZXJib3k=", "ZGF5ZHJlYW0=", "Yml0aGVybw=="], // array of base64 string which allows multi tokenid mint in one op. (string)Base64 to UTF8: c3VwZXJib3k= -> superboy.
   "dua": "1", //(uint8)years of duration. Expire date = current expire date + dua
   "prim": "true", //This will allow setting current domain as a primary domain to bind with toaddress only if toaddress is signer address as well. You can setrecord to bind with another domain later as you wish. If you don't need this, just set it to false. If prim is true but toaddress is not signer address, prim will be set as false.
-  "sig": "1234...abcd", //(optional)It's used for a premissioned mint following whitelist. 
-  "img": "https://xxx.png" //(optional) It's a customized image link. This only works when "imglp" is not set.
+  "coef": "500", //The whitelist price in sats should be "coef" * "pri"/1000.For these not in whitelist, it should always be "".
+  "sig": "1234...abcd", //It's used for a premissioned mint following whitelist.If not in whitelist or just want normal price, set it as "" 
+  "img": ["https://img.bitname.pro/img/superboy.png", "https://img.bitname.pro/img/daydream.png","https://img.bitname.pro/img/bithero.png"] //(optional) Image link to bind with token. When "imglp" and "imgf" are set, it should be "imglp"+"tokenid"(utf8)+"."+"root"+"."+imgf". If "imglp" or "imgf" aren't set, it can be customized link.
 }
 ```
 `tokenid` is an array of base64 string. The allowed maximum count of items  is `lim`. This format is only for `mint` op. Maximum length of `tokenid` base64 string is 128.
 
 `sig` is a script signed  by private key of `wla` . The unsigned content is a json object, must follow the format below:
+
+If `dua` is not an integer multiple of `idua`, `dua` will be rounded up. For example: When `idua` is 20 and `dua` is 33, `dua` will be forced to set as 40.
 
 ```json
 {
@@ -71,11 +75,11 @@ not be considered as a valid SRC-101 transaction.
     "dua": "3"
 }
 ```
-When `sig` is set in mint, the whitelist price in sats  should be `coef`*`pri`/1000.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
+When `sig` is set in mint, the whitelist price in sats should be `coef`*`pri`/1000.  `sig` can be decrypted  by public key of `wla`. If it's failed, then this mint transaction is invalid.
 
 `hash` in `sig` json must be the same as the `hash` in upper layer, otherwise transaction is invalid.
 
-`tokenid` and `dua` in `sig` json will overwrite these ones in upper layer of mint method. That means the values in `sig` determine the final parameters of this transaction.
+These parameters in `sig` json  must be the same as these ones in upper layer of mint method. Otherwise, this transaction verification will be failed.
 
 
 ### TRANSFER
@@ -105,9 +109,9 @@ transfer will be deemed invalid.
   "type": "address", //(string)Currently two kinds of record types are supported, txt and address
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt",
-  "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
+  "eth": "7748baa6434fd17e4901e2049acad30fac188398e235e92efcd9ab90dfd67c602b4c6a50f0f62a6d3fa6d6a46abe6c1ae141f8f3322b7266fe9611a029dd7a971c"
   },//(Object of string value, can include multi key-value pairs)record data, this is an example to bind with both btc and eth address.
-  "prim": "true" //"true" makes address as a primary address to bind with this domain.If you don't need this, make it as "false".
+  "prim": "true" //"true" makes this btc domain as a primary one to bind with this address.It can be true only when "btc" address is set in "data". If you don't need this, make it as "false".
 }
 ```
 
@@ -121,7 +125,7 @@ transfer will be deemed invalid.
   "data":{
   "btc": "bc1q7epcly9u55yut5k7ykmlcyrp87knt8gxd7knnt"
   },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with btc address and set eth address as null. 
-  "prim": "true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "true" //"true" makes this btc domain as a primary one to bind with this address.It can be true only when "btc" address is set in "data". If you don't need this, make it as "false".
 }
 ```
 
@@ -133,9 +137,9 @@ transfer will be deemed invalid.
   "tokenid": "c3VwZXJib3k=", //(string)Base64 to UTF8: c3VwZXJib3k= -> superboy.Maximum length of `tokenid` base64 string is 128.
   "type": "address", //(string)Currently two kinds of record types are supported: txt and address
   "data":{
-  "eth": "93cFac8715c80979f30Da024Ce9Ed4acD5A0631b"
+  "eth": "7748baa6434fd17e4901e2049acad30fac188398e235e92efcd9ab90dfd67c602b4c6a50f0f62a6d3fa6d6a46abe6c1ae141f8f3322b7266fe9611a029dd7a971c"
   },//(Object of string value, can include multi key-value pairs)record data,  this is an example to bind with eth address and set btc address as null. 
-  "prim": "true" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "false" //"true" makes this btc domain as a primary one to bind with this address.It can be true only when "btc" address is set in "data". If you don't need this, make it as "false".
 }
 ```
 
@@ -152,7 +156,7 @@ transfer will be deemed invalid.
   "github": "stampchain-io",
   "telegram": "BitcoinStamps"
   },//(Object of string value, can include multi key-value pairs)record data 
-  "prim": "false" //"true" makes this domain as a primary one to bind with this address.If you don't need this, make it as "false".
+  "prim": "false" //"true" makes this btc domain as a primary one to bind with this address.It can be true only when "btc" address is set in "data". If you don't need this, make it as "false".
 }
 ```
 
@@ -161,9 +165,16 @@ will not be considered as a valid SRC-101 transaction.
 
 `data` is a Json object of string value, it can include multi key-value pairs. 
 
-When `type` is "address", `data` MUST include address type and address value. Currently we only support `btc`and `eth` address types and only can set single address as record under each address type. 
+When `type` is "address", `data` MUST include address type. Currently we only support `btc`and `eth` address types and only can set single value as record under each address type. For `btc`,  the value MUST be a valid btc address. For `eth`, the value MUST be a result of signed msg following [EIP191](https://eips.ethereum.org/EIPS/eip-191). The message to sign is the input UTXO hash. For example:
+```
+UTXO: 3409229f61face039da6bfc947252f506f379e41e3ef4a7d0cf9006b0afce695
+UXO as Message to keccak256: d7f2304806700771ad69624987a51c1c0dc2ee7884fe75428bc3e02cb6921070
+Then sign it with aimed eth address: 7748baa6434fd17e4901e2049acad30fac188398e235e92efcd9ab90dfd67c602b4c6a50f0f62a6d3fa6d6a46abe6c1ae141f8f3322b7266fe9611a029dd7a971c
+Signer address can be recovered by keccak256 message hash and signature:
+2CA7447310b9588D9112Ee68D83dAeD4D17e5719
+```
 
-If you set a new address record in the same address type, the previous will be overwritten. If you set a single address record, for example, only btc, then eth will be set as null. It's recommended to set both `btc` and `eth` address every time when making set record transaction in case the missing one is overwritten. 
+If you set a new address record in the same address type, the previous will be overwritten. If you set a single address record, it will only update the record under this address.
 
 If `prim` is true and `type` is not "txt", `prim` will not work. If `prim` is true, `type` is "address" and `data` is not including `btc` address,  `prim` will not work as well.
 
