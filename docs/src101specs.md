@@ -37,7 +37,7 @@ index / API.
   "wla": "03f86fde54dde75b1f63a5ecbf5bbf4ed5f83fee4f35437631ac605c04a8d5f15e", //Public key of admin address for whitelist data signature.
   "imglp":"https://img.bitname.pro/img/", //Image url link prefix.The full link should be "imglp"+"tokenid"(utf8)+"."+"root"+"."+imgf"
   "imgf":"png", //image format
-  "idua": 999//(int)"idua" is minimum duration. That means the actual duration = (dua/idua + 1)*idua. The price will be (dua/idua + 1)*pri.
+  "idua": "999"//(string)"idua" is minimum duration. That means the actual duration = (dua/idua + 1)*idua. The price will be (dua/idua + 1)*pri.
 }
 ```
 
