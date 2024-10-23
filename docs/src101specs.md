@@ -21,7 +21,7 @@ index / API.
   "p": "src-101", //(string)protocol standard name for bitname service
   "root": "btc", //(string)root domain
   "op": "deploy", //(string)function name
-  "name": "Bit Name Service", //(string)collection name
+  "name": "Bitname", //(string)collection name
   "lim": "10", //(uint64)A maximum of 10 mint op are allowed op in each transaction. If there are more than 10 mint op in 1 transaction, it's regarded as an invalid transction, all op will be failed.
   "owner": "bc1q34eaj4rz9yxupzxwza2epvt3qv2nvcc0ujqqpl", //(string)owner address
   "rec": [
@@ -192,23 +192,8 @@ When `type` is "txt", `data` can be any you'd like to set. Some key words like "
 }
 ```
 
-### TRANSFEROWNERSHIP
-
-```JSON
-{
-  "p": "src-101", //(string)protocol standard for non-fungible token
-  "op": "transferownership", //(string)function name
-  "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e", //(hash256)txid of the deploy transaction
-  "newowner": "bc1qag3cemd7988sgtx2huscdf6qmvgexnsx393ayc" //(string)new owner address. Support existed 4 types of bitcoin addresses
-}
-```
-
-This allows SRC-101 admin transferring ownership to another. The
-`TRANSFEROWNERSHIP` transaction signer must be the same as "owner", otherwise it
-will not be considered as a valid SRC-101 transaction.
-
 # SRC-101 Token Requirements
 
-1. For UTF8 tokenid, these are disallowed characters: /[`~!@#$%^\-+&*()_==＝|{}":;',\\\[\]\.·<>\/?~！@#￥……&*（）——|{}【】《》'；：“”‘。，、？\s]/
+1. For root, name and UTF8 tokenid, these are disallowed characters: /[`~!@#$%^\-+&*()_==＝|{}":;',\\\[\]\.·<>\/?~！@#￥……&*（）——|{}【】《》'；：“”‘。，、？\s]/
 2. Some special **Whitespace_character** are also disallowed, here is the unicode list:
 `["\u0009","\u000A","\u000B","\u000C","\u000D","\u0020","\u0085","\u00A0","\u1680","\u2000","\u2001","\u2002","\u2003","\u2004","\u2005","\u2006","\u2007","\u2008","\u2009","\u200A","\u2028","\u2029","\u202F","\u205F","\u3000","\u180E","\u200B","\u200C","\u200D","\u2060","\uFEFF"]`
