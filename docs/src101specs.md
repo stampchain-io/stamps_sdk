@@ -165,10 +165,10 @@ will not be considered as a valid SRC-101 transaction.
 
 `data` is a Json object of string value, it can include multi key-value pairs. 
 
-When `type` is "address", `data` MUST include address type. Currently we only support `btc`and `eth` address types and only can set single value as record under each address type. For `btc`,  the value MUST be a valid btc address. For `eth`, the value MUST be a result of signed msg following [EIP191](https://eips.ethereum.org/EIPS/eip-191). The message to sign is the input UTXO hash. For example:
+When `type` is "address", `data` MUST include address type. Currently we only support `btc`and `eth` address types and only can set single value as record under each address type. For `btc`,  the value MUST be a valid btc address. For `eth`, the value MUST be a result of signed msg following [EIP191](https://eips.ethereum.org/EIPS/eip-191). The message to sign is the input UTXO hash for mint. For example:
 ```
 UTXO: 3409229f61face039da6bfc947252f506f379e41e3ef4a7d0cf9006b0afce695
-UXO as Message to keccak256: d7f2304806700771ad69624987a51c1c0dc2ee7884fe75428bc3e02cb6921070
+UTXO as Message to keccak256: d7f2304806700771ad69624987a51c1c0dc2ee7884fe75428bc3e02cb6921070
 Then sign it with aimed eth address: 7748baa6434fd17e4901e2049acad30fac188398e235e92efcd9ab90dfd67c602b4c6a50f0f62a6d3fa6d6a46abe6c1ae141f8f3322b7266fe9611a029dd7a971c
 Signer address can be recovered by keccak256 message hash and signature:
 2CA7447310b9588D9112Ee68D83dAeD4D17e5719
