@@ -66,6 +66,8 @@ not be considered as a valid SRC-101 transaction.
 
 If `dua` is not an integer multiple of `idua`, `dua` will be rounded up. For example: When `idua` is 20 and `dua` is 33, `dua` will be forced to set as 40.
 
+In `MINT` transaction, vout[0] MUST be one of `rec` addresses, otherwise transaction is invalid.
+
 ```json
 {
     "hash": "38091b803f794e50dcc10a9091becaf4f65d35d3ef9e71cfa90c7936af50757e",
@@ -191,6 +193,8 @@ When `type` is "txt", `data` can be any you'd like to set. Some key words like "
   "dua": "2" //(uint8)years of duration. Expire date = current expire date + dua
 }
 ```
+In `RENEW` transaction, vout[0] MUST be one of `rec` addresses, otherwise transaction is invalid.
+
 
 # SRC-101 Token Requirements
 
