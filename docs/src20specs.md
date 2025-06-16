@@ -510,3 +510,137 @@ previously existing stamp on the asset cannot be changed.
 
 9581330|791180|insert|issuances|{"asset": "A5428699716173256069", "asset_longname": null, "block_index": 791180, "call_date": 0, "call_price": 0.0, "callable": false, "description": "STAMP:iVBORw0KGgoAAAANSUhEUgAAACgAAAA4BAMAAAB9BqfFAAAAJ1BMVEVIZZcqRnYNERg8Qj4gJSEiLEojOFsAAAD7AQkeGx7///+SoYxUaWqIxi3EAAABTklEQVQ4y73PsU7DMBQF0FSiA6MHilg7lA8IEhmRcCR+wIq8MpQvQE8xYxrFaVkzpBuVoAM7/B7XcRrH1EJMvapk++jd1zaaB3I6XD6GEDFOO+Uj+JqIdr0tgF0o3+bb+cI+otkB63yN0yKz5xPqyiEDA/O2/XCIYAW9aK03Xw6RS9p/a20XsNmAij439MaW5tUjM1gB2QgvMqL3I2wyJSrFfBRCNCX7jTKAEqN1CN1kNDHHlUDfIQIHCg8RU5ejnTbTbnLiY3SOpSX2eDiVmOxuYxQS6AXYiADiv/8XQ3UZ3BlGeYyNDKBoQ3X5B55xh2nTfxHng/LU/CTeB+87VHjalKIe0B6YzJ5LvuIPHmZ7oD+5SjOlfESAVKJsMY7jG3OpFK144tBwfLumIsFlwASfRBWFjgt+Dwf2KbR+Lez1gKhqjYaHWABy6NhhID/iStgdKGHcpQAAAABJRU5ErkJggg==", "divisible": false, "fee_paid": 0, "issuer": "1NwCmg8gZW7KykrA7mX16zugNZZuckPg5o", "locked": true, "quantity": 0, "reset": false, "source": "1WweVUK8kLmSNt6yKKqwVxch3Z7Lw5HAY", "status": "valid", "transfer": true, "tx_hash": "f3a8df9f71bd195b43186c669666732fa86623e2d2f9633cf663b32e5e417b69", "tx_index": 2390355}|1684931053
 ```
+
+1. Field Validation Rules
+
+  ## Field Validation
+
+  ### Required Fields
+  - **DEPLOY**: `p`, `op`, `tick`, `max`, `lim`
+  - **MINT**: `p`, `op`, `tick`, `amt`
+  - **TRANSFER**: `p`, `op`, `tick`, `amt`
+
+  ### Optional Fields
+  - **dec**: Decimal places (0-18, defaults to 18 if omitted)
+
+  ### Field Format Requirements
+
+  #### Protocol Field (`p`)
+  - **Value**: "SRC-20" (case insensitive)
+  - **Type**: String
+  - **Required**: Yes
+
+  #### Operation Field (`op`)
+  - **Values**: "DEPLOY", "MINT", "TRANSFER" (case insensitive)
+  - **Type**: String
+  - **Required**: Yes
+
+  #### Ticker Field (`tick`)
+  - **Length**: 1-5 characters
+  - **Allowed characters**: [Define allowed character set from TICK_PATTERN_SET]
+  - **Type**: String (converted to lowercase)
+  - **Required**: Yes
+
+  #### Numeric Fields (`max`, `lim`, `amt`)
+  - **Format**: Numeric string or number
+  - **Range**: 0 to 2^64-1 (uint64 maximum)
+  - **Decimals**: Must respect token's decimal specification
+  - **Scientific notation**: Not allowed
+  - **Negative values**: Not allowed
+
+  #### Decimal Field (`dec`)
+  - **Range**: 0-18 (integers only)
+  - **Type**: Numeric string or integer
+  - **Default**: 18 (when omitted)
+  - **Invalid formats**: Mixed alphanumeric (e.g., "8a"), negative values
+
+  2. JSON Format Requirements
+
+  ## JSON Format Requirements
+
+  ### Valid JSON Structure
+  - Must be valid JSON syntax
+  - Field names must be quoted
+  - String values must be quoted
+  - Trailing commas are accepted (implementation-dependent)
+
+  ### Invalid Formats That Will Be Rejected
+  - Missing closing braces: `{"p": "SRC-20", "op": "DEPLOY"`
+  - Unquoted keys: `{p: "SRC-20", op: "DEPLOY"}`
+  - Invalid field values: Mixed alphanumeric in numeric fields
+
+  ### Case Sensitivity
+  - Protocol field (`p`) is case insensitive: "SRC-20", "src-20" both valid
+  - Operation field (`op`) is case insensitive: "DEPLOY", "deploy" both valid
+  - Ticker field (`tick`) is converted to lowercase for consistency
+
+  3. Validation Levels
+
+  ## Validation Levels
+
+  SRC-20 tokens undergo two levels of validation:
+
+  ### Stamp Validation (Basic)
+  - Valid JSON syntax
+  - Required fields present
+  - Basic format compliance
+  - **Result**: Determines if transaction creates a valid Bitcoin stamp
+
+  ### SRC-20 Protocol Validation (Strict)
+  - Numeric field format validation
+  - Range checking (uint64 limits)
+  - Decimal precision validation
+  - Business logic validation (sufficient balance, token deployed, etc.)
+  - **Result**: Determines if stamp represents a valid SRC-20 operation
+
+  ### Validation Outcomes
+  - **Stamp Success + SRC-20 Success**: Valid SRC-20 operation
+  - **Stamp Success + SRC-20 Failure**: Valid stamp, invalid SRC-20 (preserved for analysis)
+  - **Stamp Failure**: Invalid stamp, not indexed
+
+  4. Edge Cases and Error Handling
+
+  ## Edge Cases and Error Handling
+
+  ### Numeric Field Edge Cases
+  - **Maximum values**: 18,446,744,073,709,551,615 (2^64-1)
+  - **Zero values**: Rejected in required numeric fields
+  - **Decimal precision**: Must not exceed token's decimal specification
+  - **String numeric values**: Accepted and converted (e.g., "1000" → 1000)
+
+  ### Decimal Field Special Cases
+  - **Missing decimal field**: Defaults to 18 decimal places
+  - **Invalid decimal values**:
+    - Values > 18: Rejected
+    - Non-numeric characters: Rejected (e.g., "8a", "1.5")
+    - Negative values: Rejected
+
+  ### Ticker Field Validation
+  - **Empty ticker**: Rejected
+  - **Length > 5**: Rejected
+  - **Invalid characters**: [Specify based on TICK_PATTERN_SET]
+  - **Unicode/Control characters**: Rejected
+
+  ### Business Logic Validation
+  - **DEPLOY**: Must not already exist
+  - **MINT**: Token must be deployed, amount within limits
+  - **TRANSFER**: Sufficient balance required
+
+  5. Implementation Notes
+
+  ## Implementation Notes
+
+  ### Database Considerations
+  - Field naming: JSON uses `dec`, database may use `deci` (reserved word handling)
+  - Default values: Missing `dec` field defaults to 18 in database
+  - Invalid tokens: Failed SRC-20 validations are preserved as stamps for analysis
+
+  ### Backward Compatibility
+  - Existing tokens without `dec` field remain valid (default to 18)
+  - Case insensitive protocol handling maintains compatibility
+  - Lenient JSON parsing (trailing commas) for broader compatibility
+
+  ### Precision Handling
+  - Numeric values are quantized for `max` and `lim` fields (rounded down)
+  - Amount fields preserve decimal precision up to token specification
+  - Scientific notation is rejected to prevent precision ambiguity
